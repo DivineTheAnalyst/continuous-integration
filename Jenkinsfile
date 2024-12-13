@@ -13,22 +13,21 @@ pipeline {
                 checkout scm
             }
         }
-        stage ('Compile') {
+        stage ('Build') {
             steps {
                 sh "${MAVEN_HOME}/bin/mvn clean package"
             }
         }
         stage ('Sonarqube Analysis') {
             steps {
-                script {
-                    withCredentials([string(credentialsId: 'bfdd9c17-1e89-4513-bffa-a66a18d8dcef', variable: 'SONARQUBE_TOKEN')]){
+                withSonarQubeEnv('calculator-jenkins') {
                     sh '''
-                        '${MAVEN_HOME}/bin/mvn' sonar:sonar \
-                        -Dsonar.projectKey=calculator-jenkins \
-                        -Dsonar.host.url=http://localhost:9000
-                        -Dsonar.login=${SONARQUBE_TOKEN}
+                        mvn clean verify sonar:sonar \
+                            -Dsonar.projectKey=calculator-jenkins \
+                            -Dsonar.host.url=http://localhost:9000 \
+                            -Dsonar.login=sqp_d25db8114c477fa23d1d04910fb1d62eb1c1c410
                     '''
-                    }
+                }
                 }
             }
         }
