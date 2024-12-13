@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker build -t calculator-app:{DOCKER_TAG} .
+                        docker build -t calculator-app:${DOCKER_TAG} .
                     '''
                 }
             }
