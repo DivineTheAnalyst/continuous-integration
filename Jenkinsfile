@@ -6,7 +6,6 @@ pipeline {
     }
     tools {
         jdk 'OpenJDK-17'
-        mvn 'maven1'
     }
     stages {
         stage ('SCM') {
