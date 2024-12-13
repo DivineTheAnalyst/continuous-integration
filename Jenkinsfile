@@ -6,6 +6,7 @@ pipeline {
     }
     tools {
         jdk 'OpenJDK-17'
+        mvn 'maven1'
     }
     stages {
         stage ('SCM') {
@@ -22,7 +23,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        maven1 clean verify sonar:sonar \
+                        ${MAVEN_HOME}/bin/mvn clean verify sonar:sonar \
                             -Dsonar.projectKey=calculator-jenkins \
                             -Dsonar.host.url=http://localhost:9000 \
                             -Dsonar.login=sonar_project
