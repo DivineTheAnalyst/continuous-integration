@@ -20,7 +20,7 @@ pipeline {
         }
         stage ('Sonarqube Analysis') {
             steps {
-                withSonarQubeEnv('calculator-jenkins') {
+                script {
                     sh '''
                         mvn clean verify sonar:sonar \
                             -Dsonar.projectKey=calculator-jenkins \
