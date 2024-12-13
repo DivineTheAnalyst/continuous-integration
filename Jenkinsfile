@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        mvn clean verify sonar:sonar \
+                        mvn1 clean verify sonar:sonar \
                             -Dsonar.projectKey=calculator-jenkins \
                             -Dsonar.host.url=http://localhost:9000 \
                             -Dsonar.login=sonar_project
