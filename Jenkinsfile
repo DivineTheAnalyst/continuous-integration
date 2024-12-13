@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker build -t ${DOCKER_IMAGE_NAME}:{DOCKER_TAG} .
+                        sudo docker build -t ${DOCKER_IMAGE_NAME}:{DOCKER_TAG} .
                     '''
                 }
             }
