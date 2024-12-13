@@ -2,10 +2,10 @@ pipeline {
     agent any
     environment {
         SCANNER_HOME = tool 'SonarScanner'
+        MAVEN_HOME = tool 'maven1'
     }
     tools {
         jdk 'OpenJDK-17'
-        maven 'maven1'
     }
     stages {
         stage ('SCM') {
@@ -15,7 +15,7 @@ pipeline {
         }
         stage ('Compile') {
             steps {
-                sh 'mvn clean package'
+                sh "${MAVEN_HOME}/bin/mvn clean package"
             }
         }
         stage ('Sonarqube Analysis') {
