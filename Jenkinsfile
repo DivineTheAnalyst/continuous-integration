@@ -24,7 +24,7 @@ pipeline {
                     sh '''
                         ${MAVEN_HOME}/bin/mvn clean verify sonar:sonar \
                             -Dsonar.projectKey=calculator-jenkins \
-                            -Dsonar.host.url=http://localhost:9000 \
+                            -Dsonar.host.url=http://172.31.235.20:9000 \
                             -Dsonar.login=sonar_project
                     '''
                 }
