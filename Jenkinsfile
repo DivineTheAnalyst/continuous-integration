@@ -3,6 +3,8 @@ pipeline {
     environment {
         SCANNER_HOME = tool 'SonarScanner'
         MAVEN_HOME = tool 'maven1'
+        DOCKER_IMAGE_NAME = 'calculator-app'
+        DOCKER_TAG = 'latest'
     }
     tools {
         jdk 'OpenJDK-17'
@@ -29,6 +31,19 @@ pipeline {
                     '''
                 }
             }
+        }
+        stage ('Build Docker Image') {
+            steps {
+                script {
+                    sh '''
+                        docker build -t ${DOCKER_IMAGE_NAME}:{DOCKER_TAG} .
+                }
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Divine, you have tried.'
         }
     }
 }
